@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobHunter AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div th:fragment="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h1 class="logo-text">JobHunter <span class="text-gradient">AI</span></h1>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-item" th:classappend="${activePage == 'dashboard'} ? 'active'">
+                <span class="icon">📊</span> Dashboard
+            </a>
+            <a href="/resume" class="nav-item" th:classappend="${activePage == 'resume'} ? 'active'">
+                <span class="icon">📄</span> Resume
+            </a>
+            <a href="#" class="nav-item disabled">
+                <span class="icon">🔍</span> Jobs <span class="badge">Soon</span>
+            </a>
+            <a href="#" class="nav-item disabled">
+                <span class="icon">✉️</span> Emails <span class="badge">Soon</span>
+            </a>
+            <a href="#" class="nav-item disabled">
+                <span class="icon">📈</span> Analytics <span class="badge">Soon</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>
