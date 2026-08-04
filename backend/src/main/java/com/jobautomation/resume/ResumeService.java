@@ -5,6 +5,11 @@ import com.jobautomation.ai.AiServiceClient;
 import com.jobautomation.resume.dto.ParsedResumeData;
 import com.jobautomation.resume.dto.ResumeUploadResponse;
 import org.apache.tika.Tika;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.sax.LinkContentHandler;
+import org.apache.tika.sax.Link;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,11 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ResumeService {
@@ -70,8 +77,20 @@ public class ResumeService {
             throw new IOException("Failed to parse file text", e);
         }
 
+        // Extract PDF/DOCX annotations and embedded hyperlinks
+        List<String> extractedUrls = extractHyperlinks(filePath, rawText);
+        log.info("[DEBUG] Extracted {} hyperlinks from document: {}", extractedUrls.size(), extractedUrls);
+
+        StringBuilder enrichedText = new StringBuilder(rawText);
+        if (!extractedUrls.isEmpty()) {
+            enrichedText.append("\n\nExtracted Hyperlinks from Document:\n");
+            for (String url : extractedUrls) {
+                enrichedText.append("- ").append(url).append("\n");
+            }
+        }
+
         // Parse with AI
-        ParsedResumeData parsedData = aiServiceClient.parseResume(rawText);
+        ParsedResumeData parsedData = aiServiceClient.parseResume(enrichedText.toString());
 
         // Convert structured data back to JSON string for storage
         String parsedDataJson = objectMapper.writeValueAsString(parsedData);
@@ -96,6 +115,40 @@ public class ResumeService {
                 parsedData,
                 savedProfile.getCreatedAt()
         );
+    }
+
+    private List<String> extractHyperlinks(Path filePath, String rawText) {
+        Set<String> urls = new LinkedHashSet<>();
+
+        // 1. Extract embedded hyperlinks via Tika SAX parser
+        try (InputStream is = Files.newInputStream(filePath)) {
+            LinkContentHandler linkHandler = new LinkContentHandler();
+            AutoDetectParser parser = new AutoDetectParser();
+            Metadata metadata = new Metadata();
+            parser.parse(is, linkHandler, metadata, new ParseContext());
+
+            for (Link link : linkHandler.getLinks()) {
+                String uri = link.getUri();
+                if (uri != null && (uri.startsWith("http://") || uri.startsWith("https://") || uri.contains("linkedin.com") || uri.contains("github.com"))) {
+                    urls.add(uri.trim());
+                }
+            }
+        } catch (Exception e) {
+            log.warn("Failed to extract SAX links from document: {}", e.getMessage());
+        }
+
+        // 2. Regex search raw text for explicit URLs
+        Pattern pattern = Pattern.compile("(https?://[^\s<\"'>]+|(?:www\\.)?(?:linkedin\\.com/in/|github\\.com/)[^\s<\"'>]+)", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(rawText);
+        while (matcher.find()) {
+            String match = matcher.group();
+            if (!match.startsWith("http://") && !match.startsWith("https://")) {
+                match = "https://" + match;
+            }
+            urls.add(match.trim());
+        }
+
+        return new ArrayList<>(urls);
     }
 
     public List<ResumeProfile> getAllResumes() {

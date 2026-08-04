@@ -7,10 +7,10 @@
     <main class="main-content">
         <header class="page-header fade-in">
             <h2>Resume Management</h2>
-            <p class="subtitle">Upload and parse your resume to generate search criteria</p>
+            <p class="subtitle" id="headerSubtitle">Upload and parse your resume to generate search criteria</p>
         </header>
         
-        <div class="upload-section glass-card fade-in" style="animation-delay: 0.1s;">
+        <div class="upload-section glass-card fade-in" id="uploadSection" style="animation-delay: 0.1s;">
             <div id="dropzone" class="dropzone">
                 <div class="dropzone-content">
                     <span class="upload-icon">📄</span>
@@ -31,7 +31,10 @@
 
         <!-- Parsed Data Container (Hidden initially) -->
         <div id="parsedDataSection" class="parsed-data-section hidden fade-in">
-            <h3 class="section-title">AI Parsing Results</h3>
+            <div class="parsed-header">
+                <h3 class="section-title" style="border:none; margin:0;">AI Parsing Results</h3>
+                <button id="uploadAnotherBtn" class="btn-ghost">📄 Upload Another Resume</button>
+            </div>
             
             <div class="parsed-grid">
                 <div class="info-card glass-card">
@@ -39,6 +42,9 @@
                     <p><strong>Name:</strong> <span id="pName"></span></p>
                     <p><strong>Email:</strong> <span id="pEmail"></span></p>
                     <p><strong>Phone:</strong> <span id="pPhone"></span></p>
+                    <p><strong>Location:</strong> <span id="pLocation"></span></p>
+                    <p><strong>LinkedIn:</strong> <a id="pLinkedin" href="#" target="_blank" class="text-link">N/A</a></p>
+                    <p><strong>GitHub:</strong> <a id="pGithub" href="#" target="_blank" class="text-link">N/A</a></p>
                     <p><strong>Current Role:</strong> <span id="pRole"></span></p>
                     <p><strong>Experience:</strong> <span id="pExp"></span> years</p>
                 </div>
@@ -57,11 +63,31 @@
                     <h4>Experience Timeline</h4>
                     <ul id="pExperienceList" class="experience-list"></ul>
                 </div>
+                
+                <div class="info-card glass-card full-width">
+                    <h4>Projects</h4>
+                    <ul id="pProjectsList" class="experience-list"></ul>
+                </div>
+
+                <div class="info-card glass-card full-width">
+                    <h4>Achievements</h4>
+                    <ul id="pAchievementsList" class="experience-list"></ul>
+                </div>
+
+                <div class="info-card glass-card full-width">
+                    <h4>Targeted Roles</h4>
+                    <div id="pPreferredRoles" class="tags-container"></div>
+                </div>
+
+                <div class="info-card glass-card full-width">
+                    <h4>Preferred Locations</h4>
+                    <div id="pPreferredLocations" class="tags-container"></div>
+                </div>
             </div>
         </div>
         
         <!-- Previously Uploaded Resumes -->
-        <div class="resumes-list-section fade-in" style="animation-delay: 0.2s;" th:if="${!resumes.isEmpty()}">
+        <div id="resumesListSection" class="resumes-list-section fade-in" style="animation-delay: 0.2s;" th:if="${!resumes.isEmpty()}">
             <h3 class="section-title">Previous Uploads</h3>
             <div class="table-container glass-card">
                 <table class="resumes-table">
@@ -73,7 +99,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="resumesTableBody">
                         <tr th:each="resume : ${resumes}">
                             <td th:text="${resume.fileName}">resume.pdf</td>
                             <td th:text="${#temporals.format(resume.createdAt, 'MMM dd, yyyy HH:mm')}">Date</td>

@@ -448,3 +448,25 @@ button {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
+
+/* Parsed Section Header & Links */
+.parsed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.text-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+    word-break: break-all;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+    color: #60a5fa;
+}

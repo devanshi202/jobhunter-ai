@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toast Notification System
     const toastContainer = document.getElementById('toast-container');
     
-    function showToast(message, type = 'info') {
-        if (!toastContainer) return;
+    function showToast(message, type = 'info', duration = 4000) {
+        if (!toastContainer) return null;
         
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
@@ -11,21 +11,62 @@ document.addEventListener('DOMContentLoaded', () => {
         
         toastContainer.appendChild(toast);
         
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             toast.style.opacity = '0';
             toast.style.transform = 'translateX(100%)';
             toast.style.transition = 'all 0.3s ease';
             setTimeout(() => toast.remove(), 300);
-        }, 5000);
+        }, duration);
+
+        return toast;
     }
 
-    // Dropzone functionality
+    function formatDate(dateVal) {
+        if (!dateVal) return new Date().toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        
+        let d;
+        if (Array.isArray(dateVal)) {
+            d = new Date(dateVal[0], dateVal[1] - 1, dateVal[2], dateVal[3] || 0, dateVal[4] || 0, dateVal[5] || 0);
+        } else {
+            d = new Date(dateVal);
+        }
+
+        if (isNaN(d.getTime())) {
+            d = new Date();
+        }
+
+        return d.toLocaleString('en-US', {
+            month: 'short',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    function safeParseJson(data) {
+        if (!data) return {};
+        let parsed = data;
+        while (typeof parsed === 'string') {
+            try {
+                parsed = JSON.parse(parsed);
+            } catch (e) {
+                break;
+            }
+        }
+        return parsed && typeof parsed === 'object' ? parsed : {};
+    }
+
+    // Elements
     const dropzone = document.getElementById('dropzone');
     const fileInput = document.getElementById('fileInput');
     const uploadProgress = document.getElementById('uploadProgress');
     const progressFill = document.getElementById('progressFill');
     const progressText = document.getElementById('progressText');
     const parsedDataSection = document.getElementById('parsedDataSection');
+    const uploadSection = document.getElementById('uploadSection');
+    const headerSubtitle = document.getElementById('headerSubtitle');
+    const uploadAnotherBtn = document.getElementById('uploadAnotherBtn');
 
     if (dropzone && fileInput) {
         dropzone.addEventListener('click', () => fileInput.click());
@@ -55,6 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fileInput.addEventListener('change', function() {
             if (this.files.length > 0) handleFiles(this.files[0]);
+        });
+    }
+
+    if (uploadAnotherBtn) {
+        uploadAnotherBtn.addEventListener('click', () => {
+            if (parsedDataSection) parsedDataSection.classList.add('hidden');
+            if (uploadSection) uploadSection.classList.remove('hidden');
+            if (dropzone) dropzone.classList.remove('hidden');
+            if (uploadProgress) uploadProgress.classList.add('hidden');
+            if (headerSubtitle) headerSubtitle.classList.remove('hidden');
+            if (fileInput) fileInput.value = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
@@ -100,10 +153,15 @@ document.addEventListener('DOMContentLoaded', () => {
             progressText.textContent = '100% - Complete!';
             showToast('Resume parsed successfully!', 'success');
             
+            // Dynamically add row to table with robust date formatting
+            const expYears = data.parsedData ? (data.parsedData.experience_years || 0) : 0;
+            const dateStr = formatDate(data.createdAt);
+            addResumeToTable(data.id, data.fileName, dateStr, expYears);
+
             setTimeout(() => {
                 uploadProgress.classList.add('hidden');
                 displayParsedData(data.parsedData);
-            }, 1000);
+            }, 500);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -116,16 +174,45 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayParsedData(data) {
         if (!data) return;
         
-        // Sometimes the JSON string might need parsing if it comes back as string from API
-        const parsed = typeof data === 'string' ? JSON.parse(data) : data;
+        const parsed = safeParseJson(data);
         
         document.getElementById('pName').textContent = parsed.name || 'N/A';
         document.getElementById('pEmail').textContent = parsed.email || 'N/A';
         document.getElementById('pPhone').textContent = parsed.phone || 'N/A';
+        document.getElementById('pLocation').textContent = parsed.current_location || 'N/A';
         document.getElementById('pRole').textContent = parsed.current_role || 'N/A';
         document.getElementById('pExp').textContent = parsed.experience_years || '0';
         document.getElementById('pSummary').textContent = parsed.summary || 'No summary available.';
-        
+
+        // Links (LinkedIn & GitHub)
+        const linkedinEl = document.getElementById('pLinkedin');
+        if (linkedinEl) {
+            if (parsed.linkedin_url && parsed.linkedin_url.trim()) {
+                const url = parsed.linkedin_url.startsWith('http') ? parsed.linkedin_url : 'https://' + parsed.linkedin_url;
+                linkedinEl.href = url;
+                linkedinEl.textContent = parsed.linkedin_url;
+                linkedinEl.style.pointerEvents = 'auto';
+            } else {
+                linkedinEl.removeAttribute('href');
+                linkedinEl.textContent = 'N/A';
+                linkedinEl.style.pointerEvents = 'none';
+            }
+        }
+
+        const githubEl = document.getElementById('pGithub');
+        if (githubEl) {
+            if (parsed.github_url && parsed.github_url.trim()) {
+                const url = parsed.github_url.startsWith('http') ? parsed.github_url : 'https://' + parsed.github_url;
+                githubEl.href = url;
+                githubEl.textContent = parsed.github_url;
+                githubEl.style.pointerEvents = 'auto';
+            } else {
+                githubEl.removeAttribute('href');
+                githubEl.textContent = 'N/A';
+                githubEl.style.pointerEvents = 'none';
+            }
+        }
+
         // Skills
         const skillsContainer = document.getElementById('pSkills');
         skillsContainer.innerHTML = '';
@@ -153,7 +240,119 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        parsedDataSection.classList.remove('hidden');
+        // Projects
+        const projList = document.getElementById('pProjectsList');
+        if (projList) {
+            projList.innerHTML = '';
+            if (parsed.projects && Array.isArray(parsed.projects)) {
+                parsed.projects.forEach(proj => {
+                    const li = document.createElement('li');
+                    const techs = proj.technologies ? proj.technologies.join(', ') : '';
+                    li.innerHTML = `
+                        <div class="exp-title">${proj.title || 'Project'}</div>
+                        <div class="exp-company text-small text-muted">${techs}</div>
+                        <div class="text-small">${proj.description || ''}</div>
+                    `;
+                    projList.appendChild(li);
+                });
+            }
+        }
+        
+        // Achievements
+        const achList = document.getElementById('pAchievementsList');
+        if (achList) {
+            achList.innerHTML = '';
+            if (parsed.achievements && Array.isArray(parsed.achievements)) {
+                parsed.achievements.forEach(ach => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<div class="text-small">${ach}</div>`;
+                    achList.appendChild(li);
+                });
+            }
+        }
+
+        // Targeted Roles
+        const rolesContainer = document.getElementById('pPreferredRoles');
+        if (rolesContainer) {
+            rolesContainer.innerHTML = '';
+            if (parsed.preferred_roles && Array.isArray(parsed.preferred_roles)) {
+                parsed.preferred_roles.forEach(role => {
+                    const span = document.createElement('span');
+                    span.className = 'tag';
+                    span.textContent = role;
+                    rolesContainer.appendChild(span);
+                });
+            }
+        }
+
+        // Preferred Locations
+        const locationsContainer = document.getElementById('pPreferredLocations');
+        if (locationsContainer) {
+            locationsContainer.innerHTML = '';
+            if (parsed.preferred_locations && Array.isArray(parsed.preferred_locations)) {
+                parsed.preferred_locations.forEach(loc => {
+                    const span = document.createElement('span');
+                    span.className = 'tag';
+                    span.textContent = loc;
+                    locationsContainer.appendChild(span);
+                });
+            }
+        }
+        
+        // Hide upload section & subtitle, show parsed data section
+        if (uploadSection) uploadSection.classList.add('hidden');
+        if (headerSubtitle) headerSubtitle.classList.add('hidden');
+        if (parsedDataSection) {
+            parsedDataSection.classList.remove('hidden');
+            parsedDataSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function addResumeToTable(id, fileName, createdAtStr, expYears) {
+        const tbody = document.getElementById('resumesTableBody');
+        const listSection = document.getElementById('resumesListSection');
+
+        if (listSection && listSection.classList.contains('hidden')) {
+            listSection.classList.remove('hidden');
+        }
+
+        if (tbody) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${fileName}</td>
+                <td>${createdAtStr}</td>
+                <td>${expYears} yrs</td>
+                <td>
+                    <button class="btn-ghost view-btn" data-id="${id}">View Data</button>
+                </td>
+            `;
+            tbody.insertBefore(tr, tbody.firstChild);
+
+            const btn = tr.querySelector('.view-btn');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    fetchResumeById(id);
+                });
+            }
+        }
+    }
+
+    function fetchResumeById(id) {
+        const loadingToast = showToast('Fetching parsed data...', 'info', 1000);
+        fetch(`/api/resume/${id}`)
+        .then(res => {
+            if (!res.ok) throw new Error('Failed to fetch');
+            return res.json();
+        })
+        .then(data => {
+            if (loadingToast) loadingToast.remove();
+            displayParsedData(data.parsedData);
+        })
+        .catch(err => {
+            if (loadingToast) loadingToast.remove();
+            showToast('Failed to load resume details.', 'error');
+            console.error(err);
+        });
     }
 
     // View buttons for existing resumes
@@ -161,21 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viewButtons.forEach(btn => {
         btn.addEventListener('click', function() {
             const id = this.getAttribute('data-id');
-            showToast('Fetching parsed data...', 'info');
-            
-            fetch(`/api/resume/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                // Dropzone hide, show parsed data
-                if(dropzone) dropzone.classList.add('hidden');
-                displayParsedData(data.parsedData);
-                // Scroll to parsed data
-                parsedDataSection.scrollIntoView({ behavior: 'smooth' });
-            })
-            .catch(err => {
-                showToast('Failed to load resume details.', 'error');
-                console.error(err);
-            });
+            fetchResumeById(id);
         });
     });
 });

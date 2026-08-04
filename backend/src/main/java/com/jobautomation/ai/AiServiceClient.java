@@ -54,9 +54,17 @@ public class AiServiceClient {
         
         // Fallback
         return new ParsedResumeData(
-                "Unknown", "", "", 0.0, "Unknown", 
-                Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), 
-                Collections.emptyList(), Collections.emptyList(), "Failed to parse resume automatically"
+                "Unknown", "", "",          // name, email, phone
+                "", "", "",                 // currentLocation, linkedinUrl, githubUrl
+                0.0, "Unknown",             // experienceYears, currentRole
+                Collections.emptyList(),    // skills
+                Collections.emptyList(),    // experience
+                Collections.emptyList(),    // projects
+                Collections.emptyList(),    // education
+                Collections.emptyList(),    // achievements
+                Collections.emptyList(),    // preferredRoles
+                Collections.emptyList(),    // preferredLocations
+                "Failed to parse resume automatically"  // summary
         );
     }
 }
