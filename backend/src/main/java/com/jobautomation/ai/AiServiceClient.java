@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
@@ -66,5 +68,43 @@ public class AiServiceClient {
                 Collections.emptyList(),    // preferredLocations
                 "Failed to parse resume automatically"  // summary
         );
+    }
+
+    /** Batch embeddings via ai-service (all-MiniLM-L6-v2, 384-dim, L2-normalized). */
+    @SuppressWarnings("unchecked")
+    public List<List<Double>> embedBatch(List<String> texts) {
+        if (texts == null || texts.isEmpty()) return Collections.emptyList();
+        try {
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("texts", texts);
+            String jsonBody = objectMapper.writeValueAsString(payload);
+            RequestBody body = RequestBody.create(jsonBody, MediaType.parse("application/json"));
+            Request request = new Request.Builder()
+                    .url(aiServiceUrl + "/api/embed-batch")
+                    .post(body)
+                    .build();
+            try (Response response = httpClient.newCall(request).execute()) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Map<String, Object> root = objectMapper.readValue(response.body().string(), Map.class);
+                    List<List<Number>> vecs = (List<List<Number>>) root.get("embeddings");
+                    List<List<Double>> out = new ArrayList<>(vecs.size());
+                    for (List<Number> v : vecs) {
+                        List<Double> d = new ArrayList<>(v.size());
+                        for (Number n : v) d.add(n.doubleValue());
+                        out.add(d);
+                    }
+                    return out;
+                }
+                log.error("AI embed-batch returned HTTP {}", response.code());
+            }
+        } catch (Exception e) {
+            log.error("Failed to call AI service for batch embeddings", e);
+        }
+        return Collections.emptyList();
+    }
+
+    public List<Double> embedOne(String text) {
+        List<List<Double>> out = embedBatch(List.of(text == null ? "" : text));
+        return out.isEmpty() ? Collections.emptyList() : out.get(0);
     }
 }

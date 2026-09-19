@@ -1,0 +1,113 @@
+{
+  "name": "Devanshi Sharma",
+  "email": "sharma.devanshi.205@gmail.com",
+  "phone": "+91 70149 12941",
+  "current_location": "Gurugram, Haryana",
+  "linkedin_url": "https://www.linkedin.com/in/devanshi-sharma-958887192/",
+  "github_url": "https://github.com/devanshi202",
+  "experience_years": 2.5,
+  "current_role": "Software Engineer | Java Backend Developer",
+  "skills": [
+    "Java",
+    "Spring Boot",
+    "Spring MVC",
+    "Spring Security",
+    "Microservices",
+    "REST APIs",
+    "JWT",
+    "Hibernate",
+    "JPA",
+    "SQL",
+    "PostgreSQL",
+    "MySQL",
+    "MongoDB",
+    "AWS",
+    "Azure",
+    "Docker",
+    "CI/CD",
+    "Jenkins",
+    "Git",
+    "Maven",
+    "LLM Integration",
+    "Ollama",
+    "Semantic Search",
+    "Vector Embeddings",
+    "sentence-transformers",
+    "pgvector",
+    "Prompt Engineering",
+    "FastAPI",
+    "Apache Tika",
+    "Web Scraping",
+    "SOLID Principles",
+    "Design Patterns",
+    "Data Structures & Algorithms",
+    "Code Review",
+    "Debugging",
+    "Root Cause Analysis",
+    "Performance Optimization",
+    "Python",
+    "JavaScript",
+    "React",
+    "Angular",
+    "Agile",
+    "Scrum",
+    "JIRA",
+    "API Testing",
+    "Postman",
+    "Log Analysis"
+  ],
+  "experience": [
+    {
+      "company": "Tata Consultancy Services",
+      "role": "Software Engineer",
+      "duration": "Dec 2023 – Present",
+      "description": "Develop and maintain enterprise Java-based backend applications for Société Générale's Capital Markets platform using TCS BaNCS. Investigated and resolved 80+ UAT and production-impacting application issues through Java debugging, SQL-based data analysis, and root cause analysis. Implemented 20+ client-driven change requests and backend enhancements across multiple release cycles. Supported 10+ UAT and production release cycles, performing API validation with Postman and troubleshooting release blockers."
+    },
+    {
+      "company": "Nagarro",
+      "role": "Software Engineer Trainee",
+      "duration": "Mar 2023",
+      "description": "Built backend applications using Java, Spring Boot, Hibernate, Spring Security, and REST APIs as part of enterprise training projects. Developed cloud-based solutions using AWS and Azure services, including Virtual Machines, RDS, Lambda, and App Services. Collaborated on feature implementation and CI/CD activities using Jenkins, with frontend integration using React and Angular."
+    },
+    {
+      "company": "Blinkit",
+      "role": "Software Engineering Intern",
+      "duration": "Dec 2022",
+      "description": "Developed backend features for catalogue management and product content approval workflows serving internal business teams. Collaborated with cross-functional product and engineering teams to implement feature enhancements based on operational requirements."
+    }
+  ],
+  "projects": [
+    {
+      "title": "AI-Powered Job Search Automation Platform",
+      "technologies": [
+        "Spring Boot",
+        "FastAPI",
+        "Python",
+        "PostgreSQL",
+        "Ollama",
+        "Apache Tika",
+        "sentence-transformers",
+        "JobSpy"
+      ],
+      "description": "Architected a polyglot microservice platform — Spring Boot orchestrating DB lifecycle, REST APIs, and UI; FastAPI as the AI/ML worker running Ollama (llama3.1) for structured resume parsing. Built a 5-component weighted semantic matching engine (cosine similarity, skill overlap, YOE decay, domain and location fit) and JobSpy-based multi-portal discovery across LinkedIn and Indeed. Cut daily job-screening effort from ~40 minutes to under 2 minutes and increased job discovery volume 40x."
+    }
+  ],
+  "education": [
+    "B.Tech, Computer Science | Dr. Akhilesh Das Gupta Institute Of Technology And Management, Delhi, India | July 2023 | CGPA: 9.23"
+  ],
+  "achievements": [
+    "Employee of the Month – Tata Consultancy Services (2025)",
+    "300+ DSA problems solved",
+    "Runner-up – ReHack International Hackathon",
+    "Runner-up – Enactus Pitch or Ditch Competition"
+  ],
+  "preferred_roles": [
+    "Java Backend / Software Engineer",
+    "Software Engineer"
+  ],
+  "preferred_locations": [
+    "Gurugram, Haryana",
+    "Remote"
+  ],
+  "summary": "Software Engineer with 2.5+ years of experience building and maintaining enterprise Java backend applications in the Capital Markets domain. Skilled in Java, Spring Boot, Microservices, REST APIs, SQL, debugging, root cause analysis, and performance optimization across Agile release cycles. Extends this into applied AI engineering — architected a production-style LLM platform using Spring Boot, FastAPI, Ollama, pgvector, and sentence-transformers, cutting manual screening effort by 95%. Seeking Java Backend / Software Engineer roles focused on scalable backend, distributed systems, and AI-integrated services."
+}

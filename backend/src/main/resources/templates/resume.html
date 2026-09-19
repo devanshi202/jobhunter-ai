@@ -6,10 +6,43 @@
     
     <main class="main-content">
         <header class="page-header fade-in">
-            <h2>Resume Management</h2>
-            <p class="subtitle" id="headerSubtitle">Upload and parse your resume to generate search criteria</p>
+            <h2>Resume Profile</h2>
+            <p class="subtitle" id="headerSubtitle">Upload and parse your resume — highlights feed the whole pipeline</p>
         </header>
-        
+
+        <!-- Step 1: Active Profile Highlights (rendered by resume-profile.js) -->
+        <div id="profileHighlightsSection" class="profile-highlights hidden fade-in">
+            <div class="profile-highlights-header">
+                <h3 class="section-title" style="border:none; margin:0;">Active Profile Highlights</h3>
+                <div class="profile-actions">
+                    <button id="btnLoadHighlights" class="btn-ghost-small">⟳ Refresh</button>
+                    <button id="btnSyncProfile" class="btn-ghost-small" title="Rewrite ai-service/resume_profile.json and resume_experience.json from the active DB profile">⟳ Sync Profile JSON</button>
+                </div>
+            </div>
+            <div class="profile-hero glass-card" id="profileHero"></div>
+
+            <div class="profile-grid">
+                <div class="info-card glass-card">
+                    <h4>Skills Breakdown</h4>
+                    <div id="profileSkills" class="profile-skills"></div>
+                </div>
+
+                <div class="info-card glass-card">
+                    <h4>Targeting</h4>
+                    <h5 class="targeting-subtitle">🎯 Desired Roles</h5>
+                    <div id="profilePreferredRoles" class="tags-container"></div>
+                    <h5 class="targeting-subtitle">📍 Preferred Locations</h5>
+                    <div id="profilePreferredLocations" class="tags-container"></div>
+                </div>
+
+                <div class="info-card glass-card full-width">
+                    <h4>Experience Timeline</h4>
+                    <ul id="profileExperience" class="experience-list"></ul>
+                </div>
+            </div>
+            <p id="profileSyncStatus" class="text-small text-muted profile-sync-status"></p>
+        </div>
+
         <div class="upload-section glass-card fade-in" id="uploadSection" style="animation-delay: 0.1s;">
             <div id="dropzone" class="dropzone">
                 <div class="dropzone-content">
@@ -116,5 +149,6 @@
     
     <div id="toast-container"></div>
     <script src="/js/app.js"></script>
+    <script src="/js/resume-profile.js"></script>
 </body>
 </html>

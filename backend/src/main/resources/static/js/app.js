@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 uploadProgress.classList.add('hidden');
                 displayParsedData(data.parsedData);
+                // Notify Step 1 highlights renderer to refresh active profile
+                window.dispatchEvent(new CustomEvent('resume:uploaded', { detail: data }));
             }, 500);
         })
         .catch(error => {
@@ -363,4 +365,21 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchResumeById(id);
         });
     });
+
+    // Auto-load latest resume profile on page load if one exists in DB
+    if (parsedDataSection) {
+        fetch('/api/resume/latest')
+            .then(res => {
+                if (res.status === 200) return res.json();
+                return null;
+            })
+            .then(data => {
+                if (data && data.parsedData) {
+                    displayParsedData(data.parsedData);
+                }
+            })
+            .catch(err => {
+                console.log('No prior resume to auto-load:', err);
+            });
+    }
 });

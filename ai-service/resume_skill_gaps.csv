@@ -1,0 +1,32 @@
+skill,jd_count,pct_of_jds,on_resume
+Kubernetes,156,32.4,False
+Kafka,151,31.4,False
+SOLID,139,28.9,False
+Design Patterns,130,27.0,False
+MongoDB,88,18.3,False
+NoSQL,82,17.0,False
+GCP,64,13.3,False
+JUnit,64,13.3,False
+Algorithms,60,12.5,False
+JPA,59,12.3,False
+Redis,56,11.6,False
+Data Structures,51,10.6,False
+Spring MVC,43,8.9,False
+System Design,42,8.7,False
+Mockito,41,8.5,False
+S3,40,8.3,False
+RabbitMQ,38,7.9,False
+JIRA,37,7.7,False
+GitHub Actions,37,7.7,False
+Node.js,29,6.0,False
+Multithreading,29,6.0,False
+Terraform,27,5.6,False
+REST API,26,5.4,False
+Spring Cloud,25,5.2,False
+GraphQL,23,4.8,False
+EC2,22,4.6,False
+TDD,21,4.4,False
+Elasticsearch,21,4.4,False
+gRPC,15,3.1,False
+OAuth,10,2.1,False
+WebSocket,2,0.4,False

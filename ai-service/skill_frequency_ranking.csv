@@ -1,0 +1,54 @@
+skill,jd_count,pct_of_jds
+Java,407,84.6
+Microservices,261,54.3
+Agile,257,53.4
+Spring Boot,250,52.0
+CI/CD,241,50.1
+SQL,212,44.1
+AWS,194,40.3
+Docker,161,33.5
+Kubernetes,156,32.4
+Kafka,151,31.4
+Git,143,29.7
+SOLID,139,28.9
+Azure,136,28.3
+Design Patterns,130,27.0
+Python,106,22.0
+PostgreSQL,96,20.0
+Jenkins,93,19.3
+MySQL,88,18.3
+MongoDB,88,18.3
+Hibernate,83,17.3
+React,82,17.0
+NoSQL,82,17.0
+Scrum,80,16.6
+JavaScript,80,16.6
+Maven,69,14.3
+GCP,64,13.3
+JUnit,64,13.3
+Algorithms,60,12.5
+JPA,59,12.3
+Redis,56,11.6
+Data Structures,51,10.6
+Spring MVC,43,8.9
+System Design,42,8.7
+Mockito,41,8.5
+S3,40,8.3
+Lambda,38,7.9
+RabbitMQ,38,7.9
+JIRA,37,7.7
+GitHub Actions,37,7.7
+Node.js,29,6.0
+Multithreading,29,6.0
+Spring Security,28,5.8
+Terraform,27,5.6
+REST API,26,5.4
+Spring Cloud,25,5.2
+GraphQL,23,4.8
+JWT,23,4.8
+EC2,22,4.6
+TDD,21,4.4
+Elasticsearch,21,4.4
+gRPC,15,3.1
+OAuth,10,2.1
+WebSocket,2,0.4

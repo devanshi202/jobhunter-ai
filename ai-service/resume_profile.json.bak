@@ -1,0 +1,100 @@
+{
+  "name": "Devanshi Sharma",
+  "email": "sharma.devanshi.205@gmail.com",
+  "phone": "+91 70149 12941",
+  "skills": [
+    "Java",
+    "Python",
+    "SQL",
+    "JavaScript",
+    "Spring Boot",
+    "Spring Security",
+    "Hibernate",
+    "REST APIs",
+    "Microservices",
+    "JWT",
+    "PostgreSQL",
+    "MySQL",
+    "pgvector",
+    "AWS",
+    "Azure",
+    "Docker",
+    "Jenkins",
+    "Git",
+    "Maven",
+    "Postman",
+    "Agile/Scrum",
+    "Code Review",
+    "API Testing",
+    "Log Analysis",
+    "Apache Tika",
+    "Ollama"
+  ],
+  "summary": "Software Engineer with 2.5+ years of experience developing enterprise Java backend applications in the Capital Markets domain for Soci\u00e9t\u00e9 G\u00e9n\u00e9rale using TCS BaNCS.",
+  "projects": [
+    {
+      "title": "AI-Powered Job Search Automation Platform",
+      "description": "Architecting a microservice-based platform using Spring Boot and Python to automate job discovery, semantic matching, recruiter outreach, and application tracking.",
+      "technologies": [
+        "Spring Boot",
+        "Python",
+        "PostgreSQL",
+        "pgvector",
+        "Ollama"
+      ]
+    },
+    {
+      "title": "Product Review Community",
+      "description": "Developed a full-stack product review platform using Spring Boot and Angular with secure user authentication.",
+      "technologies": [
+        "Spring Boot",
+        "Angular",
+        "Spring Security",
+        "Hibernate"
+      ]
+    }
+  ],
+  "education": [
+    "B.Tech, Computer Science - Dr. Akhilesh Das Gupta Institute Of Technology And Management",
+    "CBSE XII - Delhi Public School"
+  ],
+  "experience": [
+    {
+      "role": "Software Engineer (Dec 2023 \u2013 Present)",
+      "company": "Tata Consultancy Services",
+      "duration": "Dec 2023 \u2013 Present",
+      "description": "Contributed to the development and maintenance of enterprise banking applications built on TCS BaNCS for Soci\u00e9t\u00e9 G\u00e9n\u00e9rale's Capital Markets platform. Investigated and resolved 80+ UAT and production-impacting defects through Java debugging, SQL-based data analysis, application log investigation, and detailed root cause analysis."
+    },
+    {
+      "role": "Software Engineer Trainee (Mar 2023)",
+      "company": "Nagarro",
+      "duration": "Mar 2023",
+      "description": "Built multiple backend applications using Java, Spring Boot, Hibernate, Spring Security, and REST APIs as part of enterprise training projects."
+    },
+    {
+      "role": "Software Engineering Intern (Dec 2022)",
+      "company": "Blinkit",
+      "duration": "Dec 2022",
+      "description": "Developed backend features for catalogue management and product content approval workflows serving internal business teams."
+    }
+  ],
+  "github_url": "https://github.com/devanshi202",
+  "achievements": [
+    "Employee of the Month \u2013 Tata Consultancy Services (2025)",
+    "Runner-up \u2013 ReHack International Hackathon",
+    "Runner-up \u2013 Enactus Pitch or Ditch Competition"
+  ],
+  "current_role": "Software Engineer (Dec 2023 \u2013 Present)",
+  "linkedin_url": "https://www.linkedin.com/in/devanshi-sharma-958887192/",
+  "preferred_roles": [
+    "Backend Developer",
+    "Java Developer",
+    "Spring Boot Developer"
+  ],
+  "current_location": "Gurugram, Haryana",
+  "experience_years": 2.5,
+  "preferred_locations": [
+    "Gurugram, Haryana",
+    "Remote"
+  ]
+}

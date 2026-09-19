@@ -1,0 +1,72 @@
+[
+  {
+    "rank": 1,
+    "company": "Citi",
+    "title": "Java Developer",
+    "note": "Hi! With experience building scalable Java solutions in Capital Markets at TCS, I'm interested in the Java Developer role at Citi and would love to connect with your team.",
+    "char_count": 171
+  },
+  {
+    "rank": 2,
+    "company": "Citi",
+    "title": "Software Engineer \u2013 Java Developer",
+    "note": "Hi! Saw the Java Backend role at Citi. With 2.5+ yrs experience building capital markets systems at TCS, I'd love to connect and learn more about your team's work.",
+    "char_count": 163
+  },
+  {
+    "rank": 3,
+    "company": "Persistent Systems",
+    "title": "Java Developer",
+    "note": "Hi! Saw the Java Backend role at Persistent Systems. With 2.5+ yrs building capital markets systems in Java & Spring Boot at TCS, I'd love to connect and discuss how my skills align with your team's needs.",
+    "char_count": 205
+  },
+  {
+    "rank": 4,
+    "company": "Siemens Energy",
+    "title": "Senior Full Stack Developer - Java with AI Expertise",
+    "note": "Hi! Saw the Full Stack Java role at Siemens Energy and was impressed by your team's work on industrial applications. With 2.5+ yrs building scalable enterprise systems at TCS, I'd love to connect.",
+    "char_count": 196
+  },
+  {
+    "rank": 5,
+    "company": "CGI",
+    "title": "SoftWare Engineer \u2013 Java Backend API",
+    "note": "Hi! Saw the Java Backend API role at CGI and thought of reaching out given my experience building scalable APIs with Spring Boot at TCS in Capital Markets. Would love to connect and learn more about your team's work.",
+    "char_count": 216
+  },
+  {
+    "rank": 6,
+    "company": "Synechron",
+    "title": "Java Developer | Microservices, Spring Boot, API Development, Cloud (AWS/Azure), Performance Tuning",
+    "note": "Hi! I'm excited about the Java Backend role at Synechron, leveraging my experience with microservices & Spring Boot from TCS's Capital Markets team. Would love to connect and learn more about your projects.",
+    "char_count": 206
+  },
+  {
+    "rank": 7,
+    "company": "Nicoll Curtin",
+    "title": "Senior Java Engineer",
+    "note": "Hi! Saw the Senior Java role at Nicoll Curtin. With 2.5+ yrs building scalable Java & Spring Boot apps at TCS in Capital Markets, I'd appreciate connecting to learn more about your team's work.",
+    "char_count": 193
+  },
+  {
+    "rank": 8,
+    "company": "PERSOL APAC",
+    "title": "Senior Java Full Stack / Microservices Developer \u2013 Global Markets & Capital Markets",
+    "note": "Hi! I came across the Senior Java Full Stack/Microservices role at Persol APAC and thought my experience building capital markets solutions at TCS might be a good fit. Would love to connect and learn more about your team's work.",
+    "char_count": 228
+  },
+  {
+    "rank": 9,
+    "company": "Synechron",
+    "title": "Java Developer \u2013 Core Java, Multithreading, SQL, Database Design & Spring Boot",
+    "note": "Hi! I'm interested in the Java Developer role at Synechron, where I can leverage my 2.5+ yrs of experience with core Java, multithreading, and database design to drive innovative solutions. Would love to connect and learn more about your team's work.",
+    "char_count": 250
+  },
+  {
+    "rank": 10,
+    "company": "HuntingCube",
+    "title": "Senior Java Developer (5+ YOE)",
+    "note": "Hi! Saw the Senior Java role at HuntingCube and thought I'd reach out. With 2.5+ yrs building scalable Java & Spring Boot services, I'm interested in exploring opportunities that leverage my expertise.",
+    "char_count": 201
+  }
+]

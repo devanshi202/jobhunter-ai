@@ -1,0 +1,16 @@
+[ {
+  "company" : "Tata Consultancy Services",
+  "role" : "Software Engineer",
+  "duration" : "Dec 2023 – Present",
+  "bullets" : [ "Develop and maintain enterprise Java-based backend applications for Société Générale's Capital Markets platform using TCS BaNCS.", "Investigated and resolved 80+ UAT and production-impacting application issues through Java debugging, SQL-based data analysis, application log analysis, and detailed root cause analysis." ]
+}, {
+  "company" : "Nagarro",
+  "role" : "Software Engineer Trainee",
+  "duration" : "Mar 2023",
+  "bullets" : [ "Built backend applications using Java, Spring Boot, Hibernate, Spring Security, and REST APIs as part of enterprise training projects.", "Developed cloud-based solutions using AWS and Azure services, including Virtual Machines, RDS, Lambda, and App Services." ]
+}, {
+  "company" : "Blinkit",
+  "role" : "Software Engineering Intern",
+  "duration" : "Dec 2022",
+  "bullets" : [ "Developed backend features for catalogue management and product content approval workflows serving internal business teams.", "Collaborated with cross-functional product and engineering teams to implement feature enhancements based on operational requirements." ]
+} ]

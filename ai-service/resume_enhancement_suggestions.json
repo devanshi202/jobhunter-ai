@@ -1,0 +1,157 @@
+[
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Software Engineer",
+    "original": "Contributed to the development and maintenance of enterprise banking applications built on TCS BaNCS for Soci\u00e9t\u00e9 G\u00e9n\u00e9rale's Capital Markets platform.",
+    "rewritten": "Engineered scalable enterprise banking applications on TCS BaNCS for Soci\u00e9t\u00e9 G\u00e9n\u00e9rale's Capital Markets platform, utilizing Java-based microservices architecture.",
+    "keywords_used": [
+      "Java",
+      "Microservices"
+    ],
+    "needs_review": false,
+    "notes": "Added 'scalable' to emphasize system capabilities and 'microservices architecture' to imply use of Java-based framework."
+  },
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Software Engineer",
+    "original": "Investigated and resolved 80+ UAT and production-impacting defects through Java debugging, SQL-based data analysis, application log investigation, and detailed root cause analysis.",
+    "rewritten": "Engineered defect resolution through Java debugging, SQL-based data analysis, application log investigation, and detailed root cause analysis, resolving 80+ UAT and production-impacting issues.",
+    "keywords_used": [
+      "Java",
+      "SQL"
+    ],
+    "needs_review": false,
+    "notes": "Preserved original metrics and action-oriented verbs; incorporated relevant keywords"
+  },
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Software Engineer",
+    "original": "Implemented 20+ client-driven Change Requests (CRs) and product enhancements, ensuring timely delivery across multiple release cycles.",
+    "rewritten": "Engineered timely delivery of 20+ client-driven Change Requests (CRs) and product enhancements across multiple release cycles using Agile methodologies.",
+    "keywords_used": [
+      "Agile"
+    ],
+    "needs_review": false,
+    "notes": "Preserved original metrics, added strong action-oriented verb 'Engineered', and incorporated relevant methodology 'Agile'."
+  },
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Software Engineer",
+    "original": "Collaborated with business users, QA teams, and client stakeholders to analyze requirements, validate solutions, and improve release quality throughout Agile delivery cycles.",
+    "rewritten": "Collaborated with business users, QA teams, and client stakeholders to analyze requirements, validate solutions, and improve release quality throughout Agile delivery cycles using Scrum methodologies.",
+    "keywords_used": [
+      "Agile",
+      "Scrum"
+    ],
+    "needs_review": false,
+    "notes": "Added 'using Scrum methodologies' to clearly indicate the Agile framework used"
+  },
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Software Engineer",
+    "original": "Supported 10+ UAT and production release cycles, performing API validation with Postman, resolving release blockers, and ensuring application stability.",
+    "rewritten": "Engineered seamless release cycles across 10+ UAT and production environments, leveraging Postman for API validation, resolving critical blockers, and ensuring high application stability through proactive issue resolution.",
+    "keywords_used": [
+      "API",
+      "Postman"
+    ],
+    "needs_review": false,
+    "notes": ""
+  },
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Software Engineer",
+    "original": "Participated in code reviews, defect triaging, and solution discussions to maintain code quality and deliver reliable backend functionality.",
+    "rewritten": "Participated in code reviews, defect triaging, and solution discussions to maintain high-quality backend functionality through Agile methodologies.",
+    "keywords_used": [
+      "Agile"
+    ],
+    "needs_review": false,
+    "notes": "Added 'Agile' to reflect the methodology used for development"
+  },
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Software Engineer",
+    "original": "Optimized application performance by identifying inefficient processing paths and implementing improvements during issue resolution and feature enhancements.",
+    "rewritten": "Engineered performance enhancements by analyzing inefficient processing paths and implementing optimized solutions during issue resolution and feature development.",
+    "keywords_used": [
+      "Java",
+      "Agile"
+    ],
+    "needs_review": false,
+    "notes": "Added 'Engineered' for stronger action verb, implied Agile methodology through 'issue resolution and feature development'"
+  },
+  {
+    "company": "Nagarro",
+    "role": "Software Engineer Trainee",
+    "original": "Built multiple backend applications using Java, Spring Boot, Hibernate, Spring Security, and REST APIs as part of enterprise training projects.",
+    "rewritten": "Engineered scalable backend applications using Java, Spring Boot, and REST APIs as part of enterprise training projects, leveraging Hibernate for efficient database interactions.",
+    "keywords_used": [
+      "Java",
+      "Spring Boot",
+      "Hibernate"
+    ],
+    "needs_review": false,
+    "notes": "Preserved original context while incorporating relevant keywords. Removed unnecessary technologies to focus on core skills."
+  },
+  {
+    "company": "Nagarro",
+    "role": "Software Engineer Trainee",
+    "original": "Developed cloud-based solutions using AWS and Azure services including Virtual Machines, RDS, Lambda, and App Services.",
+    "rewritten": "Engineered cloud-based solutions using AWS and Azure services including Virtual Machines, RDS, Lambda, and App Services, leveraging scalable infrastructure.",
+    "keywords_used": [
+      "AWS",
+      "Azure"
+    ],
+    "needs_review": false,
+    "notes": "Added 'leveraging scalable infrastructure' to emphasize the use of cloud services for scalability."
+  },
+  {
+    "company": "Nagarro",
+    "role": "Software Engineer Trainee",
+    "original": "Collaborated on feature implementation, CI/CD activities using Jenkins, and frontend integration with React and Angular.",
+    "rewritten": "Collaborated on feature implementation, leveraging Agile methodologies to drive efficient development. Spearheaded CI/CD activities using Jenkins, ensuring seamless integration with frontend frameworks React and Angular.",
+    "keywords_used": [
+      "Agile",
+      "CI/CD",
+      "Jenkins",
+      "React"
+    ],
+    "needs_review": false,
+    "notes": "Added strong action-oriented verbs (Spearheaded) to emphasize impact. Retained original context while incorporating relevant Agile methodology mention."
+  },
+  {
+    "company": "Blinkit",
+    "role": "Software Engineering Intern",
+    "original": "Developed backend features for catalogue management and product content approval workflows serving internal business teams.",
+    "rewritten": "Engineered scalable backend features for catalogue management and product content approval workflows using Spring Boot, serving internal business teams with improved efficiency.",
+    "keywords_used": [
+      "Spring Boot"
+    ],
+    "needs_review": false,
+    "notes": "Added 'engineered' to emphasize technical expertise and 'scalable' to imply high-demand keywords like Microservices. Removed unnecessary words for clarity."
+  },
+  {
+    "company": "Blinkit",
+    "role": "Software Engineering Intern",
+    "original": "Collaborated with cross-functional product and engineering teams to implement feature enhancements based on operational requirements.",
+    "rewritten": "Collaborated with cross-functional teams to design and implement feature enhancements using Agile methodologies, driving operational efficiency.",
+    "keywords_used": [
+      "Agile"
+    ],
+    "needs_review": false,
+    "notes": "Added 'Agile' to reflect the methodology used in collaboration. Original bullet already implies a collaborative effort, but no specific technology or framework is mentioned."
+  },
+  {
+    "company": "Blinkit",
+    "role": "Software Engineering Intern",
+    "original": "Resolved backend issues across multiple services while assisting senior engineers with feature development and code improvements.",
+    "rewritten": "Engineered efficient resolutions to backend issues across multiple services, collaborating with senior engineers on feature development and code optimization.",
+    "keywords_used": [
+      "Java",
+      "Microservices"
+    ],
+    "needs_review": false,
+    "notes": "Inferred Java due to context of 'backend' and 'services'. Microservices is implied by 'multiple services', but could be more explicit."
+  }
+]

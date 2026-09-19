@@ -1,0 +1,57 @@
+Professional Summary
+Software Engineer with 2.5+ years of experience developing enterprise Java backend applications in the Capital Markets domain for Société Générale using TCS BaNCS. Experienced in debugging complex application issues, root cause analysis, SQL-based investigation, implementing client-driven product enhancements, supporting UAT and production releases, and collaborating with cross-functional teams in Agile environments. Currently building an AI-powered Job Search Automation platform using Spring Boot, Python, PostgreSQL, pgvector, and Ollama. Seeking backend opportunities focused on Java, Spring Boot, REST APIs, and Microservices.
+Experience
+Tata Consultancy Services | Software Engineer (Dec 2023 – Present)
+Client: Société Générale
+Product: TCS BaNCS
+Domain: Capital Markets (Financial Services)
+Contributed to the development and maintenance of enterprise banking applications built on TCS BaNCS for Société Générale's Capital Markets platform.
+Investigated and resolved 80+ UAT and production-impacting defects through Java debugging, SQL-based data analysis, application log investigation, and detailed root cause analysis.
+Implemented 20+ client-driven Change Requests (CRs) and product enhancements, ensuring timely delivery across multiple release cycles.
+Collaborated with business users, QA teams, and client stakeholders to analyze requirements, validate solutions, and improve release quality throughout Agile delivery cycles.
+Supported 10+ UAT and production release cycles, performing API validation with Postman, resolving release blockers, and ensuring application stability.
+Participated in code reviews, defect triaging, and solution discussions to maintain code quality and deliver reliable backend functionality.
+Optimized application performance by identifying inefficient processing paths and implementing improvements during issue resolution and feature enhancements.
+
+
+Nagarro | Software Engineer Trainee (Mar 2023)
+Built multiple backend applications using Java, Spring Boot, Hibernate, Spring Security, and REST APIs as part of enterprise training projects.
+Developed cloud-based solutions using AWS and Azure services including Virtual Machines, RDS, Lambda, and App Services.
+Collaborated on feature implementation, CI/CD activities using Jenkins, and frontend integration with React and Angular.
+
+
+Blinkit | Software Engineering Intern (Dec 2022)
+Developed backend features for catalogue management and product content approval workflows serving internal business teams.
+Collaborated with cross-functional product and engineering teams to implement feature enhancements based on operational requirements.
+Resolved backend issues across multiple services while assisting senior engineers with feature development and code improvements.
+
+Projects
+AI-Powered Job Search Automation Platform
+Spring Boot | Python | PostgreSQL | pgvector | Ollama | Apache Tika | Docker
+Architecting a microservice-based platform using Spring Boot and Python to automate job discovery, semantic matching, recruiter outreach, and application tracking.
+Built a resume ingestion pipeline supporting PDF/DOCX uploads using Apache Tika with LLM-powered information extraction through Ollama.
+Implemented semantic job matching using pgvector embeddings, combining vector similarity with skill overlap and experience-based ranking.
+Developing scalable job scraping services with scheduled execution, deduplication, lifecycle management, and advanced filtering.
+Designing recruiter outreach automation using personalized LLM-generated emails and application tracking dashboards.
+
+Product Review Community
+Spring Boot | Angular | Spring Security | Hibernate | JWT | MySQL
+Developed a full-stack product review platform using Spring Boot and Angular with secure user authentication.
+Implemented JWT-based authentication and role-based authorization using Spring Security.
+Designed REST APIs supporting CRUD operations, filtering, and administrative workflows. 
+Integrated Hibernate ORM with MySQL for efficient relational data management.
+
+
+Skills
+Languages
+Java • Python • SQL • JavaScript
+Backend
+Spring Boot • Spring Security • Hibernate • REST APIs • Microservices • JWT
+Databases
+PostgreSQL • MySQL • pgvector
+Cloud & DevOps
+AWS • Azure • Docker • Jenkins • Git • Maven
+Development & Testing
+Postman • Agile/Scrum • Code Review • API Testing • Log Analysis
+AI & Tools
+Apache Tika • Ollama • Postman

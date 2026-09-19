@@ -7,8 +7,10 @@ import json
 from resume_parser import parse_resume
 from embedding_service import generate_embedding
 from email_writer import generate_cold_email
+from job_scraper import router as jobspy_router
 
 app = FastAPI(title="JobHunter AI Service")
+app.include_router(jobspy_router)
 
 # Allow CORS for local development
 app.add_middleware(
@@ -24,6 +26,9 @@ class ParseResumeRequest(BaseModel):
 
 class GenerateEmbeddingRequest(BaseModel):
     text: str
+
+class BatchEmbeddingRequest(BaseModel):
+    texts: list[str]
 
 class GenerateEmailRequest(BaseModel):
     resume_summary: str
@@ -60,6 +65,21 @@ def api_generate_embedding(req: GenerateEmbeddingRequest):
     except Exception as e:
         print(f"Error generating embedding: {e}")
         raise HTTPException(status_code=500, detail="Failed to generate embedding")
+
+@app.post("/api/embed-batch")
+def api_embed_batch(req: BatchEmbeddingRequest):
+    """Batch embeddings for match backfill (resume + JDs). MiniLM truncates
+    past ~256 tokens server-side, so cap input length to bound latency."""
+    try:
+        from embedding_service import get_model
+        model = get_model()
+        texts = [(t or "")[:4000] for t in req.texts]
+        vecs = model.encode(texts, normalize_embeddings=True, batch_size=32,
+                            show_progress_bar=False)
+        return {"embeddings": [v.tolist() for v in vecs], "dim": len(vecs[0])}
+    except Exception as e:
+        print(f"Error generating batch embeddings: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate batch embeddings")
 
 @app.post("/api/generate-email")
 def api_generate_email(req: GenerateEmailRequest):

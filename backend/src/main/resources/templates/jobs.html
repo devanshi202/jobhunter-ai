@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head}"></head>
+<body>
+    <div th:replace="~{fragments/layout :: sidebar}"></div>
+
+    <main class="main-content">
+        <header class="page-header fade-in">
+            <h2>Automated Job Search & Scraping</h2>
+            <p class="subtitle">Scrape, deduplicate, and discover live engineering opportunities tailored to your profile</p>
+        </header>
+
+        <!-- Target Candidate Profile Banner -->
+        <div class="glass-card fade-in" style="padding: 1.5rem; margin-bottom: 2rem; border-left: 4px solid var(--accent);">
+            <div class="target-profile-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <h4 style="margin: 0; color: #fff;">🎯 Target Profile Criteria</h4>
+                <span class="badge-count" style="background: rgba(0,210,255,0.2); color: #00d2ff; border: 1px solid rgba(0,210,255,0.4);">2.5 YOE (2-5 yrs range)</span>
+            </div>
+            <p class="text-small text-muted" style="margin-bottom: 0.75rem;">
+                <strong>Locations:</strong> Gurugram, Delhi NCR, Noida, Delhi | <strong>Remote:</strong> Allowed | <strong>Freshness:</strong> Last 24 Hours
+            </p>
+            <div class="job-tags" style="margin: 0;">
+                <span class="tag" style="background: rgba(102, 126, 234, 0.2); color: #a5b4fc;">Java Backend Developer</span>
+                <span class="tag" style="background: rgba(102, 126, 234, 0.2); color: #a5b4fc;">Spring Boot</span>
+                <span class="tag" style="background: rgba(102, 126, 234, 0.2); color: #a5b4fc;">REST APIs</span>
+                <span class="tag" style="background: rgba(102, 126, 234, 0.2); color: #a5b4fc;">Microservices</span>
+                <span class="tag" style="background: rgba(102, 126, 234, 0.2); color: #a5b4fc;">PostgreSQL</span>
+                <span class="tag" style="background: rgba(102, 126, 234, 0.2); color: #a5b4fc;">Docker / AWS</span>
+            </div>
+        </div>
+
+        <!-- Scraped Jobs Explorer (JobSpy CSV, deduped by company + title) -->
+        <div class="glass-card fade-in" style="padding: 1.5rem; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <h4 style="margin: 0; color: #fff;">📂 Scraped Jobs Explorer</h4>
+                    <p class="text-small text-muted" style="margin: 0.25rem 0 0 0;">swe_jobs_scraped.csv · deduped by company + title · drill down: location → search term → platform → jobs · Remote = remote query + portal is_remote flag · ranking: semantic pgvector 44 + skill 28 + exp 17 + domain 11 (no location — already segregated)</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                    <button type="button" id="btnImportCsv" class="btn-ghost-small">📥 Import CSV (dedupe)</button>
+                    <select id="matchProfileSelect" class="form-control-inline" title="Profile used for ranking">
+                        <option value="">📌 Canonical profile (latest pasted text)</option>
+                    </select>
+                    <button type="button" id="btnRankJobs" class="btn-ghost-small">⚡ Rank by my profile</button>
+                    <label class="text-small text-muted" style="display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                        <input type="checkbox" id="rankToggle" /> ⭐ Best match first
+                    </label>
+                </div>
+            </div>
+            <div id="importSummary" class="text-small text-muted" style="margin-bottom: 1rem;"></div>
+            <nav id="browseBreadcrumb" class="browse-breadcrumb text-small"></nav>
+            <div id="browseLocations" class="browse-grid"></div>
+            <div id="browseTerms" class="browse-list hidden"></div>
+            <div id="browsePlatforms" class="browse-grid hidden"></div>
+            <div id="browseJobsWrap" class="hidden">
+                <div class="jobs-filter-bar">
+                    <div id="originChips" class="origin-chips"></div>
+                    <input id="jobsFilterInput" class="form-control" placeholder="Filter by location text — try ggn, blr, hyd, pune, noida…" />
+                    <span id="jobsFilterCount" class="text-small text-muted"></span>
+                </div>
+                <div class="table-container" style="padding: 0;">
+                    <table class="browse-table">
+                        <thead>
+                            <tr>
+                                <th>Title / Company</th>
+                                <th>Location</th>
+                                <th>Links</th>
+                                <th>Posted</th>
+                                <th>Type / Level / Function</th>
+                                <th>Emails</th>
+                            </tr>
+                        </thead>
+                        <tbody id="browseJobsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Controls Card -->
+        <div class="glass-card fade-in" style="padding: 1.5rem; margin-bottom: 2rem;">
+            <form id="jobSearchForm" class="search-form-grid">
+                <div class="form-group">
+                    <label for="keywordInput">Role / Keyword Target</label>
+                    <select id="keywordInput" class="form-control">
+                        <option value="ALL_MATRIX" selected>🌐 All Target Roles Matrix (Multi-Query Engine)</option>
+                        <option value="Java Backend Developer">Java Backend Developer</option>
+                        <option value="Java Developer">Java Developer</option>
+                        <option value="Java Software Engineer">Java Software Engineer</option>
+                        <option value="Java Engineer">Java Engineer</option>
+                        <option value="Spring Boot Developer">Spring Boot Developer</option>
+                        <option value="Java Microservices">Java Microservices</option>
+                        <option value="Backend Engineer Java">Backend Engineer Java</option>
+                        <option value="Software Engineer Java">Software Engineer Java</option>
+                        <option value="Software Engineer Backend">Software Engineer Backend</option>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Backend Engineer">Backend Engineer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="locationInput">Location Target</label>
+                    <select id="locationInput" class="form-control">
+                        <option value="" selected>🌐 All Target Locations (Gurugram, NCR, Noida, Delhi)</option>
+                        <option value="Gurugram">Gurugram</option>
+                        <option value="Delhi NCR">Delhi NCR</option>
+                        <option value="Noida">Noida</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Remote">Remote</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="platformSelect">Platform</label>
+                    <select id="platformSelect" class="form-control">
+                        <option value="ALL" selected>All Platforms (LinkedIn, Naukri, Indeed)</option>
+                        <option value="LinkedIn">LinkedIn Only (f_TPR=24h, 2-5 YOE)</option>
+                        <option value="Naukri">Naukri Only (jobAge=24h, 2-5 YOE)</option>
+                        <option value="Indeed">Indeed Only (fromage=24h, Mid-level)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recencySelect">Freshness Filter</label>
+                    <select id="recencySelect" class="form-control">
+                        <option value="24" selected>Last 24 Hours</option>
+                        <option value="48">Last 48 Hours</option>
+                        <option value="168">Last 7 Days</option>
+                        <option value="0">All Time</option>
+                    </select>
+                </div>
+
+                <div class="form-group form-button-group" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <button type="submit" id="btnScrapeJobs" class="btn-primary-gradient">
+                        ⚡ Multi-Query Scrape (24h)
+                    </button>
+                    <button type="button" id="btnScrapeJobSpy" class="btn-primary-gradient" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                        🔥 JobSpy Scrape (80-100 JDs)
+                    </button>
+                </div>
+            </form>
+            
+            <div class="resume-match-bar" th:if="${!resumes.isEmpty()}">
+                <span>🎯 Auto-Scrape for Target Resume:</span>
+                <select id="resumeSelect" class="form-control-inline">
+                    <option th:each="r : ${resumes}" th:value="${r.id}" th:text="${r.fileName + ' (' + r.experienceYears + ' yrs)'}"></option>
+                </select>
+                <button type="button" id="btnScrapeByResume" class="btn-ghost-small">Run Multi-Query Engine</button>
+            </div>
+        </div>
+
+        <!-- Live Scraping Loader -->
+        <div id="scrapingLoader" class="progress-container hidden glass-card" style="padding: 2rem; margin-bottom: 2rem; text-align: center;">
+            <p>🔄 Multi-Query Engine fetching real portal posted dates... <span id="scrapingProgressText">Parsing DOM dates, direct snippets & total counts...</span></p>
+            <div class="progress-bar">
+                <div id="scrapingProgressFill" class="progress-fill" style="width: 75%;"></div>
+            </div>
+        </div>
+
+        <!-- Jobs Header & Results -->
+        <div class="jobs-results-header fade-in">
+            <h3 class="section-title" style="border:none; margin:0;">
+                Live Opportunities <span id="jobsCountBadge" class="badge-count" th:text="${jobs.size()}">0</span>
+                <span id="totalPlatformBadge" class="text-small text-muted" style="margin-left: 12px; font-weight: normal;"></span>
+            </h3>
+            <div class="platform-filter-pills">
+                <button class="pill-btn active" data-filter="ALL">All (<span id="countAll" th:text="${jobs.size()}">0</span>)</button>
+                <button class="pill-btn" data-filter="LinkedIn">LinkedIn</button>
+                <button class="pill-btn" data-filter="Naukri">Naukri</button>
+                <button class="pill-btn" data-filter="Indeed">Indeed</button>
+            </div>
+        </div>
+
+        <!-- Jobs Grid Container -->
+        <div id="jobsGrid" class="jobs-grid fade-in">
+            <div th:each="job : ${jobs}" class="job-card glass-card" th:attr="data-platform=${job.platform}">
+                <div class="job-card-header">
+                    <span th:class="${'platform-badge platform-' + #strings.toLowerCase(job.platform)}" th:text="${job.platform}">LinkedIn</span>
+                    <span class="job-time" th:text="${#temporals.format(job.postedAt, 'MMM dd, HH:mm')}">Time</span>
+                </div>
+                <h4 class="job-title" th:text="${job.title}">Job Title</h4>
+                <div class="job-company" th:text="${job.companyName + ' • ' + job.location}">Company</div>
+                
+                <div class="job-desc-container">
+                    <p class="job-desc text-small text-muted" th:text="${job.description}">Detailed Job Description...</p>
+                </div>
+
+                <div class="job-tags" th:if="${job.skills != null}">
+                    <span th:each="s : ${job.skills}" class="tag" th:text="${s}">Skill</span>
+                </div>
+
+                <div class="job-card-footer">
+                    <span class="salary-text" th:text="${job.salaryRange != null ? job.salaryRange : 'Disclosed on apply'}">Salary</span>
+                    <a th:href="${job.jobUrl}" target="_blank" class="btn-primary-sm">Apply Now ↗</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="noJobsNotice" th:class="${jobs.isEmpty() ? 'glass-card empty-notice' : 'glass-card empty-notice hidden'}">
+            <p>No 24h job postings found. Click <strong>"⚡ Multi-Query Scrape (24h)"</strong> above to fetch live listings!</p>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+    <script src="/js/app.js"></script>
+    <script src="/js/jobs.js"></script>
+</body>
+</html>

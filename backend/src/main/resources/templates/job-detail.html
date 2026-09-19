@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head}"></head>
+<body>
+    <div th:replace="~{fragments/layout :: sidebar}"></div>
+
+    <main class="main-content">
+        <header class="page-header fade-in">
+            <h2 th:text="${job.title}">Job Title</h2>
+            <p class="subtitle" th:text="${job.companyName + ' • ' + (job.location != null ? job.location : '')}">Company • Location</p>
+        </header>
+
+        <div class="glass-card fade-in" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+            <a href="/jobs" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">← Back to jobs explorer</a>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                <span class="platform-badge" th:classappend="${' platform-' + #strings.toLowerCase(job.platform)}" th:text="${job.platform}">LinkedIn</span>
+                <span class="tag tag-remote" th:if="${job.isRemote}">🏠 Remote (portal flag)</span>
+                <span class="tag" th:if="${job.searchLocation != null}" th:text="${'📍 ' + job.searchLocation}">location</span>
+                <span class="tag" th:if="${job.searchTerm != null}" th:text="${'🔎 ' + job.searchTerm}">term</span>
+                <span class="tag" th:if="${job.jobType != null}" th:text="${job.jobType}">type</span>
+                <span class="tag" th:if="${job.jobLevel != null}" th:text="${job.jobLevel}">level</span>
+                <span class="tag" th:if="${job.jobFunction != null}" th:text="${job.jobFunction}">function</span>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;" class="text-small">
+                <span th:if="${job.jobUrl != null}"><a th:href="${job.jobUrl}" target="_blank" class="text-link">Job posting ↗</a></span>
+                <span th:if="${job.jobUrlDirect != null}"><a th:href="${job.jobUrlDirect}" target="_blank" class="text-link">Direct apply link ↗</a></span>
+                <span th:if="${job.emails != null}" th:text="${'✉️ ' + job.emails}">emails</span>
+                <span th:if="${job.postedAt != null}" th:text="${'📅 Posted: ' + #temporals.format(job.postedAt, 'MMM dd, yyyy')}">posted</span>
+            </div>
+        </div>
+
+        <div class="glass-card fade-in" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+            <h4 style="color: #fff;">📝 Description</h4>
+            <div class="text-small" style="white-space: pre-wrap; color: var(--text-secondary);" th:text="${job.description}">Description</div>
+        </div>
+
+        <div class="glass-card fade-in" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+            <h4 style="color: #fff;">🏢 Company</h4>
+            <table>
+                <tbody>
+                    <tr><th style="width: 220px;">Industry</th><td th:text="${job.companyIndustry}">-</td></tr>
+                    <tr><th>Company URL</th><td><a th:if="${job.companyUrl != null}" th:href="${job.companyUrl}" target="_blank" class="text-link" th:text="${job.companyUrl}">url</a></td></tr>
+                    <tr><th>Company URL (direct)</th><td><a th:if="${job.companyUrlDirect != null}" th:href="${job.companyUrlDirect}" target="_blank" class="text-link" th:text="${job.companyUrlDirect}">url</a></td></tr>
+                    <tr><th>Addresses</th><td th:text="${job.companyAddresses}">-</td></tr>
+                    <tr><th># Employees</th><td th:text="${job.companyNumEmployees}">-</td></tr>
+                    <tr><th>Revenue</th><td th:text="${job.companyRevenue}">-</td></tr>
+                </tbody>
+            </table>
+            <div th:if="${job.companyDescription != null}" class="text-small" style="margin-top: 1rem; white-space: pre-wrap; color: var(--text-secondary);" th:text="${job.companyDescription}"></div>
+        </div>
+    </main>
+</body>
+</html>

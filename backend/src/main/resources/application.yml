@@ -45,6 +45,8 @@ app:
   ai-service:
     url: ${AI_SERVICE_URL:http://localhost:8000}
   upload-dir: ${UPLOAD_DIR:./uploads}
+  csv:
+    path: ${CSV_PATH:../ai-service/manual_pipeline/outputs/2026-09-17/swe_jobs_scraped.csv}
 
 logging:
   level:
